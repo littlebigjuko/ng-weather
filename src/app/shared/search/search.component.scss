@@ -1,0 +1,18 @@
+:host {
+  .wrapper {
+    position: relative;
+    .searchable {
+      position: absolute;
+      top: 35px;
+      background-color: white;
+      border: 1px solid #ccc;
+      .search-item {
+        cursor: pointer;
+        padding: 5px 10px;
+        &:hover {
+          background-color: whitesmoke;
+        }
+      }
+    }
+  }
+}

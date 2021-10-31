@@ -16,6 +16,9 @@
 *.launch
 .settings/
 *.sublime-workspace
+.history
+coverage
+.angulardoc.json
 
 # IDE - VSCode
 .vscode/*

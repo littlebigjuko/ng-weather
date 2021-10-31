@@ -1,0 +1,28 @@
+<button
+  class="btn"
+  [disabled]="state !== states.SUBMIT"
+  [ngClass]="{
+    'btn-primary': state == states.SUBMIT,
+    'btn-success': state == states.DONE,
+    'btn-warning': state == states.LOADING,
+    'btn-danger': state == states.ERROR
+  }"
+  (click)="execute()"
+>
+  <ng-container *ngIf="state == states.SUBMIT">
+    <span class="wrapper"><ng-content select="[submit]"></ng-content> </span>
+    <span class="default"> Save </span>
+  </ng-container>
+  <ng-container *ngIf="state == states.LOADING">
+    <span class="wrapper"><ng-content select="[loading]"></ng-content> </span>
+    <span class="default"> <span class="glyphicon glyphicon-refresh spinning"></span> </span>
+  </ng-container>
+  <ng-container *ngIf="state == states.DONE">
+    <span class="wrapper"><ng-content select="[done]"></ng-content> </span>
+    <span class="default"> Saved! </span>
+  </ng-container>
+  <ng-container *ngIf="state == states.ERROR">
+    <span class="wrapper"><ng-content select="[error]"></ng-content> </span>
+    <span class="default"> Error </span>
+  </ng-container>
+</button>

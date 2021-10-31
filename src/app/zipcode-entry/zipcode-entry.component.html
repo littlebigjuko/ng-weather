@@ -1,8 +1,15 @@
 <div class="well">
   <h2>Enter a zipcode:</h2>
-  <input type="text" #zipcode placeholder="Zipcode" class="form-control">
-  <br>
-  <button class="btn btn-primary" (click)="addLocation(zipcode.value)" >
-    Add location
-  </button>
+  <app-search [list]="countryList" placeholder="Country" (search)="country = $event"></app-search>
+  <br />
+  <input type="text" [(ngModel)]="zipcode" placeholder="Zipcode" class="form-control" />
+  <br />
+  <app-submit-button [submitable]="addLocation()">
+    <span submit> Add location </span>
+    <span loading> Adding... </span>
+    <span done>
+      <i class="glyphicon glyphicon-ok-sign"></i>
+      Done
+    </span>
+  </app-submit-button>
 </div>

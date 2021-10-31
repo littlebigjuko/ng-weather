@@ -1,6 +1,7 @@
 <div class="container-fluid">
-
+  <div *ngIf="weatherService.refreshing" class="alert alert-info" role="alert">
+    <b>Heads up!</b> Refreshing the list!
+  </div>
   <app-zipcode-entry> </app-zipcode-entry>
   <app-current-conditions></app-current-conditions>
-
 </div>
