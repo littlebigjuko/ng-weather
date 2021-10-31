@@ -1,5 +1,5 @@
 <div class="well">
-  <h2>Enter a zipcode:</h2>
+  <h2>Enter country and a zipcode:</h2>
   <app-search [list]="countryList" placeholder="Country" (search)="country = $event"></app-search>
   <br />
   <input type="text" [(ngModel)]="zipcode" placeholder="Zipcode" class="form-control" />
