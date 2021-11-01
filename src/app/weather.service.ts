@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { combineLatest, Observable, timer, zip } from 'rxjs';
-import { delay, map, switchMap, tap } from 'rxjs/operators';
+import { delay, filter, map, switchMap, tap } from 'rxjs/operators';
 
+import { environment } from './../environments/environment';
 import { WeatherData } from './models/WeatherData';
 
 export const PERIOD: number = 30000;
@@ -11,7 +12,7 @@ export const UX_NOTIFICATION_DELAY: number = 3000;
 
 @Injectable()
 export class WeatherService {
-  static URL = 'http://api.openweathermap.org/data/2.5';
+  static URL = environment.weatherUrl;
   static APPID = '5a4b2d457ecbef9eb2a71e480b947604';
   static ICON_URL =
     'https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-hdpi/';
@@ -21,6 +22,7 @@ export class WeatherService {
   constructor(private http: HttpClient) {
     timer(DUE_TIME, PERIOD)
       .pipe(
+        filter(() => this.currentConditions.length > 0),
         tap(() => {
           this.refreshing = true;
         }),

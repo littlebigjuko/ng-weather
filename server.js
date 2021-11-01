@@ -1,10 +1,20 @@
 const express = require('express');
-
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
-const port = process.env.PORT || 80;
-app.use(express.static('dist'));
 
-const expose = (req, res) => res.sendFile(process.cwd() + "/dist/index.html");
+const WEATHER_URL = 'http://api.openweathermap.org/data/2.5';
+const port = process.env.PORT || 80;
+const apiProxy = createProxyMiddleware({
+	target: WEATHER_URL,
+	changeOrigin: true,
+	pathRewrite: { '^/api': '' },
+	cookieDomainRewrite: '',
+});
+app.use('/api', apiProxy);
+
+app.use(express.static('./dist'));
+
+const expose = (req, res) => res.sendFile(process.cwd() + "/dist");
 
 app.get('/', expose);
 app.get('/*', expose);
